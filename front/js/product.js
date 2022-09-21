@@ -1,17 +1,6 @@
-// Récupération de l'ID du produit
-const getProductId = () => {
-  return new URL(location.href).searchParams.get("id");
-};
-const productId = getProductId();
-fetch(`http://localhost:3000/api/products/${productId}`)
-  .then((response) => {
-    return response.json();
-  })
-
-  .then((product) => {
-    selectedProduct(product);
-    registredProduct(product);
-  })
-  .catch((error) => {
-    alert(error);
-  });
+const str = window.location;
+const url = new URL(str);
+const id = url.searchParams.get("id");
+const host = "http://localhost:3000/";
+const objectURL = host + "api/products/" + id;
+console.log(id);
