@@ -47,7 +47,7 @@ const insertionProduit = (canapes) => {
     // on crée un enfant pour notre lien
     items.appendChild(a);
     // pour le moment, on renseigne le lien vide
-    a.href = "#";
+    a.href = "product.html?id=" + canapeElement._id;
 
     // on crée un enfant pour notre lien !
     a.appendChild(article);
@@ -79,36 +79,3 @@ const insertionProduit = (canapes) => {
 // j'appelle ma fonction 1ère qui fetch les canapés
 // au sein de laquelle j'ai ma fonction qui les affiche !
 getCanape();
-
-/* je crée mes Variables */
-const url = "http://localhost:3000/api/products/";
-const itemsBox = document.getElementById("items");
-
-// Pour Initialiser la page index.html
-loadProducts();
-
-// Chargement et mise en page.
-function loadProducts() {
-  // j'attends un fetch de l'url (variable)
-  fetch(url)
-    // La réponse
-    .then((res) => {
-      // Si la réponse est bonne le rendre en Json
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then((data) => {
-      data.forEach((product) => {
-        // on crée le lien de l'article.
-        let myLink = document.createElement("a");
-        myLink.setAttribute("href", `./product.html?id=${product._id}`);
-        myLink.innerHTML = `<article><img src="${product.imageUrl}" alt="${product.altTxt}"><h3 class="productName">${product.name}</h3><p class="productDescription">${product.description}</p></article>`;
-        itemsBox.appendChild(myLink);
-        console.log(myLink);
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
