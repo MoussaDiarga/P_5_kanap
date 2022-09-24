@@ -30,7 +30,6 @@ fetch(`http://localhost:3000/api/products/${idCanape}`)
     document.querySelector("#description").textContent =
       displayCanape.description;
     // Choisir la couleur
-    let canapeColor = document.createElement("colors");
     document.querySelector("#colors").textContent = displayCanape.color;
   })
   .catch(function (err) {
