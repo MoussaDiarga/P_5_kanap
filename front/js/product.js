@@ -25,13 +25,24 @@ fetch(`http://localhost:3000/api/products/${idCanape}`)
     // ajout du prix
 
     document.querySelector("#price").textContent = displayCanape.price;
-
-    // Mettre la description
+    // ajout de la description
     document.querySelector("#description").textContent =
       displayCanape.description;
-    // Choisir la couleur
-    document.querySelector("#colors").textContent = displayCanape.color;
+    // Choisir la couleur/on crée une boucle
+    for (let color of displayCanape.colors) {
+      let canapeColor = document.createElement("option");
+      canapeColor.value = color;
+      canapeColor.innerHTML = color;
+      document.querySelector("#colors").appendChild(canapeColor);
+    }
+    // recuperation de la quantite
+    const quantityChoice = document.getElementById("quantity");
+    if (quantityChoice.value == 0 || quantityChoice.value > 100) {
+      alert("Merci de sélectionner une quantité comprise entre 1 et 100"); // si la quantité est égale à 0 ou si elle dépasse 100 = message d'erreur
+      return;
+    }
   })
+
   .catch(function (err) {
     let error = document.querySelector("main");
     error.innerHTML = `<h2>Une erreur est survenue !</h2><br><p>Nos équipes sont sur le pont.</p>`;
