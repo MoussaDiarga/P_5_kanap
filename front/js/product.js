@@ -35,12 +35,6 @@ fetch(`http://localhost:3000/api/products/${idCanape}`)
       canapeColor.innerHTML = color;
       document.querySelector("#colors").appendChild(canapeColor);
     }
-    // recuperation de la quantite
-    const quantityChoice = document.getElementById("quantity");
-    if (quantityChoice.value == 0 || quantityChoice.value > 100) {
-      alert("Merci de sélectionner une quantité comprise entre 1 et 100"); // si la quantité est égale à 0 ou si elle dépasse 100 = message d'erreur
-      return;
-    }
   })
 
   .catch(function (err) {
@@ -141,3 +135,10 @@ addToCart.addEventListener("click", () => {
     );
   }
 });
+// Ecouter l'évenement ajouter au panier
+// recuperation de la quantite
+const quantityChoice = document.getElementById("quantity");
+if (quantityChoice.value == 0 || quantityChoice.value > 100) {
+  alert("Merci de sélectionner une quantité comprise entre 1 et 100"); // si la quantité est égale à 0 ou si elle dépasse 100 = message d'erreur
+  return;
+}
