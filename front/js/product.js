@@ -140,5 +140,4 @@ addToCart.addEventListener("click", () => {
 const quantityChoice = document.getElementById("quantity");
 if (quantityChoice.value == 0 || quantityChoice.value > 100) {
   alert("Merci de sélectionner une quantité comprise entre 1 et 100"); // si la quantité est égale à 0 ou si elle dépasse 100 = message d'erreur
-  return;
 }
