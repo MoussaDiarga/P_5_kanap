@@ -41,31 +41,34 @@ function getItemCart(itemList) {
       // récupération des produits du localStorage
       for (product of cart) {
         // l'id que l'on récupére dans l'item doit être le même que product
-        if (item.id === product._id) {
-          // Recherche l'id #cart__items
-          const cart__items = document.querySelector("#cart__items");
-          // je crée un enfant pour l'article
-          cart__items.appendChild(article);
-          // Insertion de l'élément "article"
-          const article = document.createElement("article");
-          article.classList.add("cart__item");
-          // je crée un enfant pour notre article, à savoir l'image
-          article.appendChild("div");
-          // JE CREE UNE PREMIERE DIV DANS ARTICLE
-          const div = document.createElement("div");
-          // je crée une classe à la div
-          div.classList.add("cart__item__img");
-          // je crée l'enfant de la div
-          div.appendChild("img");
+        if (item._id === product._id) {
+          // je crée l'article
+          let articleCard = document.createElement("article");
+          articleCard.classList.add("cart__item");
+          document.querySelector("#cart__items").appendChild(articleCard);
+
+          // je crée la div pour les images
+          let divItem = document.createElement("div");
+          divItem.classList.add("cart__item_img");
+          articleCard.appendChild(divItem);
+
           // je crée l'image
-          const img = document.createElement("img");
-          // je donne l'URL de notre image à notre attribut SRC
-          img.src = item.imageUrl;
-          // je donne l'ALT de notre image à notre attribut ALT
-          img.alt = item.altTxt;
-          // JE CREE UNE DEUXIEME DIV DANS ARTICLE
-          article.appendChild("div");
-          const div_ = document.createElement("div");
+          let img = document.createElement("img");
+          // je passe l'url en attribut
+          img.setAttribute("src", item.imageUrl);
+          // pareil pour le alt
+          img.setAttribute("alt", item.altTxt);
+          divItem.appendChild(img);
+
+          // Je crée une seconde div
+          let itemContent = document.createElement("div");
+          article.appendChild(itemContent);
+          itemContent.className = "cart__item__content";
+
+          // J'ajoute la description
+          let itemDescription = document.createElement("div");
+          itemContent.appendChild(itemDescription);
+          itemDescription.className = "cart__item__content__description";
         }
       }
     }
