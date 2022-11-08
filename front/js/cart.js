@@ -50,6 +50,8 @@ function getItemCart(itemList) {
           // je crée l'article
           let articleCard = document.createElement("article");
           articleCard.classList.add("cart__item");
+          articleCard.setAttribute("data-id", product._id);
+          articleCard.setAttribute("data-color", product.colors);
           document.querySelector("#cart__items").appendChild(articleCard);
 
           // je crée la div pour les images
@@ -139,6 +141,7 @@ function getItemCart(itemList) {
     }
     getTotals(totalPrice);
     console.log("totalPrice", totalPrice);
+    deleteProduct();
   }
 }
 
@@ -171,21 +174,31 @@ function getTotals(total) {
 function deleteProduct() {
   let dltBtn = document.querySelectorAll(".deleteItem");
 
-  for (let i = 0; i < dltBtn.length; i++) {
-    dltBtn[i].addEventListener("click", (event) => {
+  for (let button of dltBtn) {
+    button.addEventListener("click", (event) => {
       event.preventDefault();
+      console.log("test");
+      const cart__item = button.closest(".cart__item");
+      console.log(cart__item);
 
-      // let idDelete = cart[i].idProduit;
-      // let colorDelet = color[i].productColors;
-      // produitLocalStorage = cart.filter(
-      //   (el) => el.cart !== idDelete || el.couleurProduit !== colorDelet
+      localStorage.getItem("cart");
+      const colors = cart__item.getAttribute("data-color");
+      const idProduct = cart__item.getAttribute("data-id");
+      console.log(colors, idProduct);
+
+      cart = cart.filter(
+        (element) => !(element.id == idProduct && element.color == colors)
+      );
+      console.log(cart);
+      // Mise à jour du localStorage
+      localStorage.setItem("cart", JSON.stringify(cart));
+      // Refresh de la page Panier
+      location.reload();
+      alert("Article supprimé du panier.");
+
+      // const cart = cart.filter(
+      //   (product) => !(product._id == deleteId && product.colors == deleteColor)
       // );
-
-      localStorage.setItem("produit", JSON.stringify(cart));
-
-      // // Alerte lorsque le produit est supprimé :
-      // alert("Ce produit a bien été supprimé de votre panier");
-      // location.reload();
     });
   }
 }

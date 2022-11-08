@@ -77,15 +77,17 @@ const saveCart = (cart) => {
 
 // fonction pour récupérer les données du localStorage
 const getCart = () => {
+  console.log("test");
   let cart = [];
   cart = localStorage.getItem("cart");
   // si il'n y a rien, on retourne un tableau vide
-  if (cart == null) {
-    return [];
+  if (cart) {
+    console.log(cart);
+    return JSON.parse(cart);
   }
   // sinon on retourne la chaine de caractère en tableau
   else {
-    return JSON.parse(cart);
+    return [];
   }
 };
 
